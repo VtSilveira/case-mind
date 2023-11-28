@@ -9,12 +9,4 @@ app.use(cors());
 
 app.use("/professores", professoresRoutes);
 
-// app.get("/professores", async function(rec, res){
-//   return res.status(200).json( {
-//     teste:
-//   })
-// })
-
-console.log(app._router.stack);
-
 app.listen(8800);
