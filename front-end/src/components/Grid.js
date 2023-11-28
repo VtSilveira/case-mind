@@ -41,7 +41,26 @@ export const Td = styled.td`
   }
 `;
 
-const Grid = ({ professores }) => {
+const Grid = ({ professores, setProfessores, setOnEdit }) => {
+
+  const handleEdit = (item) => {
+    setOnEdit(item);
+  }
+
+  const handleDelete = async (id) => {
+    await axios
+      .delete("http://localhost:8800/professores/" + id)
+      .then(({ data }) => {
+        const newProfessores = professores.filter((professor) => professor.id !== id);
+
+        setProfessores(newProfessores);
+        toast.success(data);
+      })
+      .catch(({ data }) => toast.error(data));
+    
+    setOnEdit(null);
+  }
+
   return (
     <Table>
       <Thead>
@@ -56,14 +75,14 @@ const Grid = ({ professores }) => {
       <Tbody>
         {professores.map((item, i) => (
           <Tr key={i}>
-            <Td width="30%">{item.nome}</Td>
-            <Td width="30%">{item.email}</Td>
-            <Td width="30%">{item.cpf}</Td>
+            <Td width="20%">{item.nome}</Td>
+            <Td width="50%">{item.email}</Td>
+            <Td width="20%">{item.cpf}</Td>
             <Td alignCenter width="5%">
-              <FaEdit />
+              <FaEdit onClick={() => handleEdit(item.id)}/>
             </Td>
             <Td alignCenter width="5%">
-              <FaTrash />
+              <FaTrash onClick={() => handleDelete(item.id)} />
             </Td>
           </Tr>
         ))}

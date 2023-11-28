@@ -1,5 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components"
+import axios from "axios";
+import { toast } from "react-toastify"
 
 const FormContainer = styled.form`
   display: flex;
@@ -37,11 +39,62 @@ const Button = styled.button`
   height: 42px;
 `;
 
-const Form = ({ onEdit }) => {
+const Form = ({ getProfessores, onEdit, setOnEdit }) => {
   const ref = useRef();
 
+  useEffect(() => {
+    if (onEdit) {
+      const professor = ref.current;
+
+      professor.nome.value = onEdit.nome;
+      professor.email.value = onEdit.email;
+      professor.cpf.value = onEdit.cpf;
+    }
+  }, [onEdit]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const professor = ref.current;
+
+    if (
+      !professor.nome.value ||
+      !professor.email.value ||
+      !professor.cpf.value 
+    ) {
+      return toast.warn("Preencha todos os campos!")
+    }
+
+    if (onEdit) {
+      await axios
+        .put("http://localhost:8800/professores/" + onEdit.id, {
+          nome: professor.nome.value,
+          email: professor.email.value,
+          cpf: professor.cpf.value,
+        })
+        .then(({ data }) => toast.success(data))
+        .catch(({ data }) => toast.error(data));
+    } else {
+      await axios
+        .post("http://localhost:8800/professores", {
+          nome: professor.nome.value,
+          email: professor.email.value,
+          cpf: professor.cpf.value,
+        })
+        .then(({ data }) => toast.success(data))
+        .catch(({ data }) => toast.error(data));
+    }
+
+    professor.nome.value = "";
+    professor.email.value = "";
+    professor.cpf.value = "";
+
+    setOnEdit(null)
+    getProfessores();
+  };
+
   return (
-    <FormContainer ref={ref}>
+    <FormContainer ref = { ref } onSubmit = { handleSubmit }>
       <InputArea>
         <Label>Nome</Label>
         <Input name="nome" />
