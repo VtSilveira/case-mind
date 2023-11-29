@@ -1,4 +1,5 @@
 import { db } from "../db.js";
+import * as bcrypt from "bcrypt"
 
 export const getProfessores = (_, res) => {
   const query = "SELECT * FROM professor";
@@ -15,12 +16,13 @@ export const getProfessores = (_, res) => {
 };
 
 export const addProfessor = (req, res) => {
-  const query = "INSERT INTO professor(`nome`, `email`, `cpf`) VALUES(?)"
+  const query = "INSERT INTO professor(`nome`, `email`, `cpf`, `senha`) VALUES(?)"
 
   const values = [
     req.body.nome,
     req.body.email,
     req.body.cpf,
+    bcrypt.hashSync(req.body.senha, 12),
   ];
 
   db.query(query, [values], (err) => {

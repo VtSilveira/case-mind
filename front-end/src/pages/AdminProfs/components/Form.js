@@ -62,7 +62,8 @@ const Form = ({ getProfessores, onEdit, setOnEdit }) => {
     if (
       !professor.nome.value ||
       !professor.email.value ||
-      !professor.cpf.value 
+      !professor.cpf.value ||
+      !professor.senha.value
     ) {
       return toast.warn("Preencha todos os campos!")
     }
@@ -73,6 +74,7 @@ const Form = ({ getProfessores, onEdit, setOnEdit }) => {
           nome: professor.nome.value,
           email: professor.email.value,
           cpf: professor.cpf.value,
+          senha: professor.senha.value,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -82,6 +84,7 @@ const Form = ({ getProfessores, onEdit, setOnEdit }) => {
           nome: professor.nome.value,
           email: professor.email.value,
           cpf: professor.cpf.value,
+          senha: professor.senha.value,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -90,6 +93,7 @@ const Form = ({ getProfessores, onEdit, setOnEdit }) => {
     professor.nome.value = "";
     professor.email.value = "";
     professor.cpf.value = "";
+    professor.senha.value = "";
 
     setOnEdit(null)
     getProfessores();
@@ -108,6 +112,10 @@ const Form = ({ getProfessores, onEdit, setOnEdit }) => {
       <InputArea>
         <Label>CPF</Label>
         <Input name="cpf" />
+      </InputArea>
+      <InputArea>
+        <Label>Senha</Label>
+        <Input name="senha" />
       </InputArea>
 
       <Button type = "submit">SALVAR</Button>

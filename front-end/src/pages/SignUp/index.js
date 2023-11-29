@@ -1,39 +1,61 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Container } from "./styles";
+import api from "../../services/api";
 
-class SignUp extends Component {
-  state = {
-    username: "",
-    email: "",
-    password: "",
-    error: ""
-  };
+function SignUp() {
+  const [state, setState] = useState(
+    {
+      nome: "",
+      email: "",
+      cpf: "",
+      senha: "",
+    }
+  );
+  
+  const navigate = useNavigate()
 
-  handleSignUp = e => {
+  const handleSignUp = e => {
     e.preventDefault();
-    alert("Eu vou te registrar");
+    api.post("/professores", state).then().catch( (err) => console.log(err) )
+    navigate("/")
   };
 
-  render() {
+
     return (
       <Container>
-        <Form onSubmit={this.handleSignUp}>
-          {this.state.error && <p>{this.state.error}</p>}
+        <Form onSubmit={handleSignUp}>
           <input
             type="text"
             placeholder="Nome de usuário"
-            onChange={e => this.setState({ username: e.target.value })}
+            onChange={e => setState((prevState) => ({
+              nome: e.target.value,
+              ...prevState
+            }))} 
           />
           <input
             type="email"
             placeholder="Endereço de e-mail"
-            onChange={e => this.setState({ email: e.target.value })}
+            onChange={e => setState((prevState) => ({
+              email: e.target.value,
+              ...prevState
+            }))}
+          />
+           <input
+            type="text"
+            placeholder="CPF"
+            onChange={e => setState((prevState) => ({
+              cpf: e.target.value,
+              ...prevState
+            }))}
           />
           <input
             type="password"
             placeholder="Senha"
-            onChange={e => this.setState({ password: e.target.value })}
+            onChange={e => setState((prevState) => ({
+              senha: e.target.value,
+              ...prevState
+            }))}
           />
           <button type="submit">Cadastrar</button>
           <hr />
@@ -41,7 +63,6 @@ class SignUp extends Component {
         </Form>
       </Container>
     );
-  }
 }
 
 export default SignUp;
