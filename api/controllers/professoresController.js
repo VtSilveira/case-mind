@@ -31,7 +31,7 @@ export const addProfessor = (req, res) => {
 };
 
 export const updateProfessor = (req, res) => {
-  const query = "UPDATE professor SET `nome` = ?, `email` = ?, `cpf` = ? WHERE `id` = ?";
+  const query = "UPDATE professor SET `nome` = ?, `email` = ?, `cpf` = ? WHERE `idprofessor` = ?";
 
   const values = [
     req.body.nome,
@@ -47,7 +47,7 @@ export const updateProfessor = (req, res) => {
 }
 
 export const deleteProfessor = (req, res) => {
-  const query = "DELETE FROM professor WHERE `id` = ?";
+  const query = "DELETE FROM professor WHERE `idprofessor` = ?";
 
   db.query(query, [req.params.id], (err) => {
     if (err) return res.json(err);

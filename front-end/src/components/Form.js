@@ -46,6 +46,8 @@ const Form = ({ getProfessores, onEdit, setOnEdit }) => {
     if (onEdit) {
       const professor = ref.current;
 
+      // console.log(onEdit)
+
       professor.nome.value = onEdit.nome;
       professor.email.value = onEdit.email;
       professor.cpf.value = onEdit.cpf;
@@ -67,7 +69,7 @@ const Form = ({ getProfessores, onEdit, setOnEdit }) => {
 
     if (onEdit) {
       await axios
-        .put("http://localhost:8800/professores/" + onEdit.id, {
+        .put("http://localhost:8800/professores/" + onEdit.idprofessor, {
           nome: professor.nome.value,
           email: professor.email.value,
           cpf: professor.cpf.value,

@@ -44,6 +44,7 @@ export const Td = styled.td`
 const Grid = ({ professores, setProfessores, setOnEdit }) => {
 
   const handleEdit = (item) => {
+    // console.log(item);
     setOnEdit(item);
   }
 
@@ -51,7 +52,7 @@ const Grid = ({ professores, setProfessores, setOnEdit }) => {
     await axios
       .delete("http://localhost:8800/professores/" + id)
       .then(({ data }) => {
-        const newProfessores = professores.filter((professor) => professor.id !== id);
+        const newProfessores = professores.filter((professor) => professor.idprofessor !== id);
 
         setProfessores(newProfessores);
         toast.success(data);
@@ -79,10 +80,10 @@ const Grid = ({ professores, setProfessores, setOnEdit }) => {
             <Td width="50%">{item.email}</Td>
             <Td width="20%">{item.cpf}</Td>
             <Td alignCenter width="5%">
-              <FaEdit onClick={() => handleEdit(item.id)}/>
+              <FaEdit onClick={() => handleEdit(item)}/>
             </Td>
             <Td alignCenter width="5%">
-              <FaTrash onClick={() => handleDelete(item.id)} />
+              <FaTrash onClick={() => handleDelete(item.idprofessor)} />
             </Td>
           </Tr>
         ))}

@@ -1,11 +1,11 @@
 import GlobalStyle from "./styles/global";
 import styled from "styled-components";
-import Form from "./components/Form.js"
-import Grid from "./components/Grid.js"
+import Form from "./components/Form.js";
+import Grid from "./components/Grid";
+import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { useState, useEffect } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-//import "react-toastify/dist/ReactToastfy.css"
 
 const Container = styled.div`
   width: 100%;
