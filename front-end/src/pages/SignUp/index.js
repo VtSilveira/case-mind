@@ -4,65 +4,63 @@ import { Form, Container } from "./styles";
 import api from "../../services/api";
 
 function SignUp() {
-  const [state, setState] = useState(
-    {
-      nome: "",
-      email: "",
-      cpf: "",
-      senha: "",
-    }
-  );
-  
-  const navigate = useNavigate()
+  const [state, setState] = useState({
+    nome: "",
+    email: "",
+    cpf: "",
+    senha: "",
+  });
 
-  const handleSignUp = e => {
-    e.preventDefault();
-    api.post("/professores", state).then().catch( (err) => console.log(err) )
-    navigate("/")
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    // console.log("Dados do estado no momento do envio:", state);
+    api.post("/professores", state).then().catch((err) => console.log(err));
+    navigate("/");
+  };
 
-    return (
-      <Container>
-        <Form onSubmit={handleSignUp}>
-          <input
-            type="text"
-            placeholder="Nome de usuário"
-            onChange={e => setState((prevState) => ({
-              nome: e.target.value,
-              ...prevState
-            }))} 
-          />
-          <input
-            type="email"
-            placeholder="Endereço de e-mail"
-            onChange={e => setState((prevState) => ({
-              email: e.target.value,
-              ...prevState
-            }))}
-          />
-           <input
-            type="text"
-            placeholder="CPF"
-            onChange={e => setState((prevState) => ({
-              cpf: e.target.value,
-              ...prevState
-            }))}
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            onChange={e => setState((prevState) => ({
-              senha: e.target.value,
-              ...prevState
-            }))}
-          />
-          <button type="submit">Cadastrar</button>
-          <hr />
-          <Link to="/">Fazer login</Link>
-        </Form>
-      </Container>
-    );
+  return (
+    <Container>
+      <Form onSubmit={handleSignUp}>
+        <input
+          type="text"
+          name="nome"
+          placeholder="Nome de usuário"
+          onChange={handleInputChange}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Endereço de e-mail"
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="cpf"
+          placeholder="CPF"
+          onChange={handleInputChange}
+        />
+        <input
+          type="password"
+          name="senha"
+          placeholder="Senha"
+          onChange={handleInputChange}
+        />
+        <button type="submit">Cadastrar</button>
+        <hr />
+        <Link to="/">Fazer login</Link>
+      </Form>
+    </Container>
+  );
 }
 
 export default SignUp;
