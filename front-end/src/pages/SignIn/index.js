@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Container, Title } from "../SignIn/styles.js";
-import GlobalStyle from "../../styles/global.js";
+import { Form, Container, Title } from "./styles.js";
 import api from "../../services/api";
+import GlobalStyle from "../../styles/global";
 
-function SignUp() {
+function SignIn() {
   const [state, setState] = useState({
     nome: "",
     email: "",
@@ -22,7 +22,7 @@ function SignUp() {
     }));
   };
 
-  const handleSignUp = (e) => {
+  const handleSignIn = (e) => {
     e.preventDefault();
     // console.log("Dados do estado no momento do envio:", state);
     api.post("/professores", state).then().catch((err) => console.log(err));
@@ -31,24 +31,12 @@ function SignUp() {
 
   return (
     <Container>
-      <Form onSubmit={handleSignUp}>
-        <Title>Fazer cadastro na plataforma</Title>
-        <input
-          type="text"
-          name="nome"
-          placeholder="Nome de usuário"
-          onChange={handleInputChange}
-        />
+      <Form onSubmit={handleSignIn}>
+        <Title>Fazer Log-in na plataforma</Title>
         <input
           type="email"
           name="email"
           placeholder="Endereço de e-mail"
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="cpf"
-          placeholder="CPF"
           onChange={handleInputChange}
         />
         <input
@@ -57,13 +45,14 @@ function SignUp() {
           placeholder="Senha"
           onChange={handleInputChange}
         />
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Fazer Login</button>
         <hr />
-        <Link to="/SignIn">Fazer login</Link>
+        <span>Ainda não possui cadastro?</span> 
+        <Link to="/SignUp">Clique aqui para cadastrar</Link>
       </Form>
       <GlobalStyle />
     </Container>
   );
 }
 
-export default SignUp;
+export default SignIn;

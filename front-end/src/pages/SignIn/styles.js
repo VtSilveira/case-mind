@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const Title = styled.h2`
+  margin-bottom: 10px;
+`;
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -9,7 +13,8 @@ export const Container = styled.div`
 export const Form = styled.form`
   width: 400px;
   background: #fff;
-  padding: 20px;
+  padding: 60px;
+  border-radius: 7px;
   display: flex;
   flex-direction: column;
   align-items: center;
