@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Container, Title } from "./styles.js";
-import api from "../../services/api";
-import GlobalStyle from "../../styles/global";
+import api from "../../services/api.js";
+import { login } from "../../services/auth.js";
+import GlobalStyle from "../../styles/global.js";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignIn() {
   const [state, setState] = useState({
-    nome: "",
     email: "",
-    cpf: "",
     senha: "",
   });
 
@@ -24,9 +25,15 @@ function SignIn() {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    // console.log("Dados do estado no momento do envio:", state);
-    api.post("/professores", state).then().catch((err) => console.log(err));
-    navigate("/");
+    console.log("Dados do estado no momento do envio:", state);
+
+    api
+    .post("/professores/Login", state)
+    .then( (response) => {
+      login(response.data.token);
+      navigate("/");
+    })
+    .catch((err) => toast.error("Erro: Email ou senha incorretos."));
   };
 
   return (
@@ -50,6 +57,7 @@ function SignIn() {
         <span>Ainda não possui cadastro?</span> 
         <Link to="/SignUp">Clique aqui para cadastrar</Link>
       </Form>
+      <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
       <GlobalStyle />
     </Container>
   );

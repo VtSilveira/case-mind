@@ -51,6 +51,7 @@ export const Form = styled.form`
     border: 0;
     border-radius: 5px;
     width: 100%;
+    cursor: pointer;
   }
   hr {
     margin: 20px 0;

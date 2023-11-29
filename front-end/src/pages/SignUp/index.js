@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Container, Title } from "../SignIn/styles.js";
 import GlobalStyle from "../../styles/global.js";
-import api from "../../services/api";
+import api from "../../services/api.js";
+import { login } from "../../services/auth.js";
+
 
 function SignUp() {
   const [state, setState] = useState({
@@ -25,8 +27,14 @@ function SignUp() {
   const handleSignUp = (e) => {
     e.preventDefault();
     // console.log("Dados do estado no momento do envio:", state);
-    api.post("/professores", state).then().catch((err) => console.log(err));
-    navigate("/");
+    api
+    .post("/professores", state)
+    .then( (response) => {
+      login(response.data.token);
+      navigate("/");
+    })
+    .catch((err) => console.log(err));
+    
   };
 
   return (
