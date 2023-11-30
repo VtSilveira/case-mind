@@ -1,7 +1,7 @@
 import JWT from "jsonwebtoken";
 
 export const autenticacao = (req, res, next) => {
-  if (!req.headers.authorization.lenght)
+  if (!req.headers.authorization)
     return res.status(403).json('Faltando token!');
 
   const token = req.headers.authorization.split(" ")[1];
