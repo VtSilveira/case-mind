@@ -20,6 +20,9 @@ export const addProfessor = (req, res) => {
   const query = "INSERT INTO professor(`nome`, `email`, `cpf`, `senha`, `acesso`) VALUES(?)"
   const acesso = "professor";
 
+  if (!(/^\d{11}$/.test(req.body.cpf)))
+    return res.status(400).json("CPF inválido")
+
   const values = [
     req.body.nome,
     req.body.email,

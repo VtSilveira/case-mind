@@ -4,6 +4,8 @@ import { Form, Container, Title } from "../SignIn/styles.js";
 import GlobalStyle from "../../styles/global.js";
 import api from "../../services/api.js";
 import { login } from "../../services/auth.js";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function SignUp() {
@@ -33,7 +35,7 @@ function SignUp() {
       login(response.data.token);
       navigate("/");
     })
-    .catch((err) => console.log(err));
+    .catch((err) => toast.error(err.response.data));
     
   };
 
@@ -69,6 +71,7 @@ function SignUp() {
         <hr />
         <Link to="/SignIn">Fazer login</Link>
       </Form>
+      <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
       <GlobalStyle />
     </Container>
   );
