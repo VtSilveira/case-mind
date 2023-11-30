@@ -1,10 +1,11 @@
 import express from "express";
 import { getCursos, addCurso, updateCurso, deleteCurso, getCursosPorProfessor } from "../controllers/cursosController.js"
 import { autenticacao } from "../middlewares/auth.js"
+import { acesso } from "../middlewares/admin.js"
 
 const cursosRouter = express.Router()
 
-cursosRouter.get("/", getCursos)
+cursosRouter.get("/", acesso, getCursos)
 
 cursosRouter.get("/professor", autenticacao, getCursosPorProfessor)
 
