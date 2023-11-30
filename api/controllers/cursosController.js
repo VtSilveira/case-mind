@@ -64,6 +64,16 @@ export const updateCurso = (req, res) => {
   })
 }
 
+export const changeVisibility = (req, res) => {
+  const query = "UPDATE curso SET `visibilidade` = ? WHERE `idcurso` = ?";
+
+  db.query(query, [req.body.visibilidade, req.params.id], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Visibilidade do curso alterada com sucesso.")
+  })
+}
+
 export const deleteCurso = (req, res) => {
   const query = "DELETE FROM curso WHERE `idcurso` = ?";
 

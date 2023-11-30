@@ -41,7 +41,7 @@ export const addProfessor = (req, res) => {
       expiresIn: '3h'
      });
 
-    return res.status(200).json({ token })
+    return res.status(200).json({ token, acesso })
   });
 };
 
@@ -89,6 +89,6 @@ export const Login = (req, res) => {
       expiresIn: '3h'
      });
 
-    return res.status(200).json({ token })
+    return res.status(200).json({ token, acesso: results[0].acesso })
   })
 }
