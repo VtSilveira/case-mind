@@ -25,7 +25,6 @@ function SignIn() {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    console.log("Dados do estado no momento do envio:", state);
 
     api
     .post("/professores/Login", state)

@@ -11,7 +11,7 @@ export const getProfessores = (_, res) => {
       return res.json(err);
     }
 
-    console.log(data)
+    // console.log(data)
     return res.status(200).json(data);
   });
 };
