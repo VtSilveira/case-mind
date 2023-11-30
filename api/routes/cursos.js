@@ -1,5 +1,5 @@
 import express from "express";
-import { getCursos, addCurso, updateCurso, deleteCurso, getCursosPorProfessor } from "../controllers/cursosController.js"
+import { getCursos, addCurso, updateCurso, deleteCurso, getCursosPorProfessor, changeVisibility } from "../controllers/cursosController.js"
 import { autenticacao } from "../middlewares/auth.js"
 import { acesso } from "../middlewares/admin.js"
 
@@ -12,6 +12,8 @@ cursosRouter.get("/professor", autenticacao, getCursosPorProfessor)
 cursosRouter.post("/", autenticacao, addCurso)
 
 cursosRouter.put("/:id", updateCurso)
+
+cursosRouter.put("/visibilidade/:id", changeVisibility)
 
 cursosRouter.delete("/:id", deleteCurso)
 

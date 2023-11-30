@@ -32,7 +32,7 @@ function SignUp() {
     api
     .post("/professores", state)
     .then( (response) => {
-      login(response.data.token);
+      login(response.data);
       navigate("/Home");
     })
     .catch((err) => toast.error(err.response.data));
@@ -69,7 +69,7 @@ function SignUp() {
         />
         <button type="submit">Cadastrar</button>
         <hr />
-        <Link to="/SignIn">Fazer login</Link>
+        <Link to="/">Fazer login</Link>
       </Form>
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
       <GlobalStyle />

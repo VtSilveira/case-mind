@@ -29,7 +29,7 @@ function SignIn() {
     api
     .post("/professores/Login", state)
     .then( (response) => {
-      login(response.data.token);
+      login(response.data);
       navigate("/Home");
     })
     .catch((err) => toast.error("Erro: Email ou senha incorretos."));

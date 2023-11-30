@@ -1,7 +1,7 @@
 import React from "react";
-
+import Switch from "react-switch";
 import styled from "styled-components";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
 import api from "../../../services/api.js"
 
@@ -45,17 +45,25 @@ export const Td = styled.td`
 const Grid = ({ cursos, setCursos, setOnEdit }) => {
 
   const handleEdit = (item) => {
-    // console.log(item);
     setOnEdit(item);
   }
 
-  const handleDelete = async (id) => {
-    api
-      .delete("/cursos/" + id)
-      .then(({ data }) => {
-        const newCursos = cursos.filter((curso) => curso.idcurso !== id);
+  const handleVisibility = async (item) => {
 
-        setCursos(newCursos);
+    const {idcurso, visibilidade} = item;
+    const novaVisibilidade = !visibilidade;
+
+    api
+      .put(`/cursos/visibilidade/${idcurso}`, {visibilidade: novaVisibilidade})
+      .then(({ data }) => {
+        const novosCursos = cursos.map((curso) => {
+          if (curso.idcurso === idcurso)
+            return {...curso, visibilidade: novaVisibilidade}
+
+          return curso
+        });
+
+        setCursos(novosCursos);
         toast.success(data);
       })
       .catch(({ data }) => toast.error(data));
@@ -63,31 +71,33 @@ const Grid = ({ cursos, setCursos, setOnEdit }) => {
     setOnEdit(null);
   }
 
+
   return (
     <Table>
       <Thead>
         <Tr>
+          <Th></Th>
           <Th>Nome</Th>
           <Th>Categoria</Th>
           <Th>Descrição</Th>
-          <Th>Imagem</Th>
+          <Th>Responsável</Th>
           <Th></Th>
-          <Th></Th>
+          <Th>Ativar/Desativar</Th>
         </Tr>
       </Thead>
       <Tbody>
         {cursos.map((item, i) => (
           <Tr key={i}>
+            <Td width="15%">{item.imagem}</Td>
             <Td width="20%">{item.nome}</Td>
             <Td width="20%">{item.categoria}</Td>
             <Td width="20%">{item.descricao}</Td>
-            <Td width="20%">{item.imagem}</Td>
-            {/* <Td width="20%">{item.professor}</Td> */}
+            <Td width="15%">{item.professor}</Td>
             <Td alignCenter width="5%">
               <FaEdit onClick={() => handleEdit(item)}/>
             </Td>
             <Td alignCenter width="5%">
-              <FaTrash onClick={() => handleDelete(item.idcurso)} />
+              <Switch onChange={() => handleVisibility(item)} checked={item.visibilidade} />
             </Td>
           </Tr>
         ))}
