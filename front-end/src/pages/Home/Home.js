@@ -1,37 +1,14 @@
 import GlobalStyle from "../../styles/global.js";
-import styled from "styled-components";
 import Grid from "./components/Grid.js";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import { getAcesso, getToken } from "../../services/auth.js";
+import { getAcesso, getToken, logout } from "../../services/auth.js";
 import api from "../../services/api.js";
+import { Button, ContainerApp, LogOut, Title } from "./styles.js";
 
-const Container = styled.div`
-  width: 1600px;
-  max-width: 1600px;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-`;
-
-const Title = styled.h2``;
-
-const Button = styled.button`
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
-  background-color: #2c73d2;
-  color: white;
-  height: 42px;
-`;
-
-function App() {
+function Home() {
   const [cursos, setCursos] = useState([]);
   const navigate = useNavigate();
 
@@ -54,21 +31,27 @@ function App() {
     }
   }
 
+  const handleLogOut = () => {
+    logout();
+    navigate("/");
+  }
+
   useEffect(() => {
     getCursos();
   }, [setCursos]);
 
   return (
     <>
-      <Container>
+      <ContainerApp>
+      <LogOut onClick={() => handleLogOut()}>Sair</LogOut>
         <Title> CURSOS </Title>
-        <Button onClick={() => navigate("/CriarNovoCurso",)}>Criar novo curso</Button>
+        {getAcesso() === "professor" && (<Button onClick={() => navigate("/CriarNovoCurso",)}>Criar novo curso</Button>)}
         <Grid cursos={ cursos } setCursos={ setCursos } />
-      </Container>
+      </ContainerApp>
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
       <GlobalStyle />
     </>
   );
 }
 
-export default App;
+export default Home;

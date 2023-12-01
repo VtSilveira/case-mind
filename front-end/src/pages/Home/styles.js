@@ -1,7 +1,55 @@
 import styled from "styled-components";
+import { FaEdit } from "react-icons/fa";
+
+export const Edit = styled(FaEdit).attrs({
+  size: 20, 
+  color: "#2c73d2"
+})`
+  cursor: pointer;
+`;
 
 export const Title = styled.h2`
   margin-bottom: 10px;
+`;
+
+export const ContainerApp = styled.div`
+  width: 1600px;
+  max-width: 1600px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const LogOut = styled.button`
+  padding: 8px 16px;
+  margin-top: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: red;
+  color: white;
+  height: 42px;
+  align-self: flex-end;
+  margin-right: 240px;
+`;
+
+export const Button = styled.button`
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: #2c73d2;
+  color: white;
+  height: 42px;
+`;
+
+export const Input = styled.input`
+  padding: 12px 16px;
+  border: 1px solid #2c73d2 !important;
+  outline: none;
+  border-radius: 7px;
 `;
 
 export const Container = styled.div`
@@ -9,6 +57,13 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
+`;
+
+export const Image = styled.img`
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+  border-radius: 10px;
 `;
 export const Form = styled.form`
   width: 400px;

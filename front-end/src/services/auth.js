@@ -9,4 +9,5 @@ export const login = data => {
 };
 export const logout = () => {
   localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(ACESS_KEY);
 };

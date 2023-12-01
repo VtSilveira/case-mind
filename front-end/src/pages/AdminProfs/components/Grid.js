@@ -33,7 +33,7 @@ export const Th = styled.th`
 
 export const Td = styled.td`
   padding-top: 15px;
-  text-align: ${(props) => (props.alignCenter ? "center" : "start")};
+  text-align: ${(props) => (props.aligncenter ? "center" : "start")};
   width: ${(props) => (props.width ? props.width : "auto")};
 
   @media (max-width: 500px) {
@@ -79,10 +79,10 @@ const Grid = ({ professores, setProfessores, setOnEdit }) => {
             <Td width="20%">{item.nome}</Td>
             <Td width="50%">{item.email}</Td>
             <Td width="20%">{item.cpf}</Td>
-            <Td alignCenter width="5%">
+            <Td aligncenter width="5%">
               <FaEdit onClick={() => handleEdit(item)}/>
             </Td>
-            <Td alignCenter width="5%">
+            <Td aligncenter width="5%">
               <FaTrash onClick={() => handleDelete(item.idprofessor)} />
             </Td>
           </Tr>

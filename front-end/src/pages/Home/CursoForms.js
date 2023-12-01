@@ -12,7 +12,7 @@ const Cancel = styled.a`
   cursor: pointer;
 `;
 
-function CriarCurso({ onEdit, setOnEdit }) {
+function CursoForms({ onEdit, setOnEdit }) {
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -79,11 +79,19 @@ function CriarCurso({ onEdit, setOnEdit }) {
     }
   }
 
+  const handleDelete = () => {
+    api
+      .delete(`/cursos/${location.state.edit.idcurso}`)
+      .then( () => {
+        toast.success("Curso deletado com sucesso!")
+      })
+      .catch((err) => toast.error(err.response.data));
+  }
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-        <Title>CRIAR NOVO CURSO</Title> 
-        {/* arrumar pra ver se é edit ou create */}
+        <Title>{location.state?.edit ? "EDITAR CURSO" : "CRIAR NOVO CURSO"}</Title> 
         <div className="input-label">
           <label> Nome: </label>
           <input
@@ -139,7 +147,9 @@ function CriarCurso({ onEdit, setOnEdit }) {
           />
         </div>
         
-        <button type="submit">Cadastrar</button>
+        {location.state?.edit && <span onClick={() => handleDelete()}>Excluir Curso</span>}
+
+        <button type="submit">{location.state?.edit ? "Salvar" : "Cadastrar"}</button>
         <hr />
         <Cancel onClick={() => navigate("/Home")}>Voltar</Cancel>
       </Form>
@@ -149,4 +159,4 @@ function CriarCurso({ onEdit, setOnEdit }) {
   );
 }
 
-export default CriarCurso;
+export default CursoForms;

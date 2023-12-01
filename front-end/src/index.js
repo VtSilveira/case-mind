@@ -4,21 +4,27 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import App from './pages/Home/App.js';
+import Home from './pages/Home/Home.js';
 import SignUp from './pages/SignUp/index.js';
 import SignIn from './pages/SignIn/index.js';
-// import AdminProfessores from './pages/AdminProfs/AdminProfessores.js'; 
-import CriarCurso from './pages/Home/CriarEditarCurso.js';
-// import { getToken } from './services/auth.js';
+import CursoForms from './pages/Home/CursoForms.js';
+
+const ProtectedRoute = ({
+  token,
+  children
+}) => {
+  if (!token) return <SignIn />
+  return children;
+}
 
 const router = createBrowserRouter([
   {
     path: "/Home",
-    element: <App />,
+    element: <Home /> ,
   },
   {
     path: "/CriarNovoCurso",
-    element: <CriarCurso />,
+    element: <CursoForms />,
   },
   {
     path: "/SignUp",
@@ -29,17 +35,6 @@ const router = createBrowserRouter([
     element: <SignIn />,
   },
 ]);
-
-// const router2 = createBrowserRouter([
-//   {
-//     path: "/Home",
-//     element: <App />,
-//   },
-//   {
-//     path: "/CriarNovoCurso",
-//     element: <CriarCurso />,
-//   },
-// ]);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

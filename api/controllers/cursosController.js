@@ -1,6 +1,5 @@
 import { db } from "../db.js";
 
-
 export const getCursos = (_, res) => {
   const query = "SELECT * FROM curso";
 
