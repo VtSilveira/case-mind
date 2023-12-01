@@ -1,7 +1,7 @@
 import GlobalStyle from "../../styles/global.js";
 import styled from "styled-components";
-import Form from "./components/Form.js";
 import Grid from "./components/Grid.js";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,13 +21,23 @@ const Container = styled.div`
 
 const Title = styled.h2``;
 
+const Button = styled.button`
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: #2c73d2;
+  color: white;
+  height: 42px;
+`;
+
 function App() {
   const [cursos, setCursos] = useState([]);
   const [onEdit, setOnEdit] = useState(null);
+  const navigate = useNavigate();
 
   const getCursos = async () => {
     try { 
-      // logado como ADM
       const token = getToken();
       const acesso = getAcesso();
 
@@ -41,7 +51,6 @@ function App() {
 
       setCursos(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
     } catch (error) {
-      // sem estar logado como ADM
       toast.error(error)
     }
   }
@@ -52,9 +61,11 @@ function App() {
 
   return (
     <>
+    
       <Container>
         <Title> CURSOS </Title>
-        <Form onEdit = { onEdit } setOnEdit = { setOnEdit } getcursos = { getCursos } />
+        <Button onClick={() => navigate("/CriarNovoCurso")}>Criar novo curso</Button>
+        {/* <Form onEdit = { onEdit } setOnEdit = { setOnEdit } getcursos = { getCursos } /> */}
         <Grid cursos = { cursos } setCursos = { setCursos } setOnEdit = { setOnEdit } />
       </Container>
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />

@@ -3,7 +3,8 @@ import Switch from "react-switch";
 import styled from "styled-components";
 import { FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
-import api from "../../../services/api.js"
+import { getAcesso } from "../../../services/auth.js";
+import api from "../../../services/api.js";
 
 const Table = styled.table`
   width: 100%;
@@ -82,7 +83,7 @@ const Grid = ({ cursos, setCursos, setOnEdit }) => {
           <Th>Descrição</Th>
           <Th>Responsável</Th>
           <Th></Th>
-          <Th>Ativar/Desativar</Th>
+          {getAcesso() === 'admin' && <Th>Ativar/Desativar</Th>}
         </Tr>
       </Thead>
       <Tbody>
@@ -97,7 +98,9 @@ const Grid = ({ cursos, setCursos, setOnEdit }) => {
               <FaEdit onClick={() => handleEdit(item)}/>
             </Td>
             <Td alignCenter width="5%">
-              <Switch onChange={() => handleVisibility(item)} checked={item.visibilidade} />
+            {getAcesso() === 'admin' && (
+                <Switch onChange={() => handleVisibility(item)} checked={item.visibilidade} />
+            )}
             </Td>
           </Tr>
         ))}

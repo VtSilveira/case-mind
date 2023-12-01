@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Container, Title } from "../SignIn/styles.js";
+import { Form, Container, Title } from "../SignIn/styles.js"; 
 import GlobalStyle from "../../styles/global.js";
 import api from "../../services/api.js";
 import { login } from "../../services/auth.js";

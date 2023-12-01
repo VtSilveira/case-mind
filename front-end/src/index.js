@@ -7,7 +7,8 @@ import {
 import App from './pages/Home/App.js';
 import SignUp from './pages/SignUp/index.js';
 import SignIn from './pages/SignIn/index.js';
-import AdminProfessores from './pages/AdminProfs/AdminProfessores.js';
+// import AdminProfessores from './pages/AdminProfs/AdminProfessores.js'; 
+import CriarCurso from './pages/Home/CriarCurso.js';
 
 const router = createBrowserRouter([
   {
@@ -22,9 +23,13 @@ const router = createBrowserRouter([
     path: "/",
     element: <SignIn />,
   },
+  // {
+  //   path: "/AdminProfessores",
+  //   element: <AdminProfessores />,
+  // },
   {
-    path: "/AdminProfessores",
-    element: <AdminProfessores />,
+    path: "/CriarNovoCurso",
+    element: <CriarCurso />,
   },
 ]);
 
