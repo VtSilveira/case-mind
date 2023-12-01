@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Form, Container, Title } from "./styles.js"; 
+import { Form, Container, Title, Delete } from "./styles.js"; 
 import { getToken } from "../../services/auth.js";
 import api from "../../services/api.js";
 
@@ -147,7 +147,7 @@ function CursoForms({ onEdit, setOnEdit }) {
           />
         </div>
         
-        {location.state?.edit && <span onClick={() => handleDelete()}>Excluir Curso</span>}
+        {location.state?.edit && <Delete onClick={() => handleDelete()}>Excluir Curso</Delete>}
 
         <button type="submit">{location.state?.edit ? "Salvar" : "Cadastrar"}</button>
         <hr />

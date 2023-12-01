@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { FaEdit } from "react-icons/fa";
 
+export const Delete = styled.span`
+  text-decoration: underline;
+  color: red;
+  margin-bottom: 16px;
+  cursor: pointer;
+`;
+
 export const Edit = styled(FaEdit).attrs({
   size: 20, 
   color: "#2c73d2"

@@ -9,14 +9,6 @@ import SignUp from './pages/SignUp/index.js';
 import SignIn from './pages/SignIn/index.js';
 import CursoForms from './pages/Home/CursoForms.js';
 
-const ProtectedRoute = ({
-  token,
-  children
-}) => {
-  if (!token) return <SignIn />
-  return children;
-}
-
 const router = createBrowserRouter([
   {
     path: "/Home",
