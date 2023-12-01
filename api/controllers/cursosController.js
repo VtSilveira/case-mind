@@ -16,8 +16,7 @@ export const getCursos = (_, res) => {
 };
 
 export const getCursosPorProfessor = (req, res) => {
-  const query = "SELECT * FROM curso WHERE `idprofessor` = ?";
-
+  const query = "SELECT * FROM curso WHERE `idprofessor` = ? AND `visibilidade` = 1";
   db.query(query, [req.user.idprofessor], (err, data) => {
     if (err) {
       console.log(err)
@@ -30,7 +29,7 @@ export const getCursosPorProfessor = (req, res) => {
 };
 
 export const addCurso = (req, res) => {
-  const query = "INSERT INTO curso(`nome`, `categoria`, `descricao`, `imagem`, `idprofessor`) VALUES(?)"
+  const query = "INSERT INTO curso(`nome`, `categoria`, `descricao`, `imagem`, `idprofessor`, `visibilidade`) VALUES(?)"
 
   const values = [
     req.body.nome,
@@ -38,6 +37,7 @@ export const addCurso = (req, res) => {
     req.body.descricao,
     req.body.imagem,
     req.user.idprofessor,
+    1,
   ];
 
   db.query(query, [values], (err) => {
