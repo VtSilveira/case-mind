@@ -29,7 +29,7 @@ export const getCursosPorProfessor = (req, res) => {
 };
 
 export const addCurso = (req, res) => {
-  const query = "INSERT INTO curso(`nome`, `categoria`, `descricao`, `imagem`, `idprofessor`, `visibilidade`) VALUES(?)"
+  const query = "INSERT INTO curso(`nome`, `categoria`, `descricao`, `imagem`, `idprofessor`, `professor`, `visibilidade`) VALUES(?)"
 
   const values = [
     req.body.nome,
@@ -37,6 +37,7 @@ export const addCurso = (req, res) => {
     req.body.descricao,
     req.body.imagem,
     req.user.idprofessor,
+    req.body.professor,
     1,
   ];
 
