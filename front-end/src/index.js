@@ -8,12 +8,17 @@ import App from './pages/Home/App.js';
 import SignUp from './pages/SignUp/index.js';
 import SignIn from './pages/SignIn/index.js';
 // import AdminProfessores from './pages/AdminProfs/AdminProfessores.js'; 
-import CriarCurso from './pages/Home/CriarCurso.js';
+import CriarCurso from './pages/Home/CriarEditarCurso.js';
+// import { getToken } from './services/auth.js';
 
 const router = createBrowserRouter([
   {
     path: "/Home",
     element: <App />,
+  },
+  {
+    path: "/CriarNovoCurso",
+    element: <CriarCurso />,
   },
   {
     path: "/SignUp",
@@ -23,15 +28,18 @@ const router = createBrowserRouter([
     path: "/",
     element: <SignIn />,
   },
-  // {
-  //   path: "/AdminProfessores",
-  //   element: <AdminProfessores />,
-  // },
-  {
-    path: "/CriarNovoCurso",
-    element: <CriarCurso />,
-  },
 ]);
+
+// const router2 = createBrowserRouter([
+//   {
+//     path: "/Home",
+//     element: <App />,
+//   },
+//   {
+//     path: "/CriarNovoCurso",
+//     element: <CriarCurso />,
+//   },
+// ]);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

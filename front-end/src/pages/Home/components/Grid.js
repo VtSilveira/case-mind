@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Switch from "react-switch";
 import styled from "styled-components";
 import { FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { getAcesso } from "../../../services/auth.js";
 import api from "../../../services/api.js";
+import { useNavigate } from "react-router-dom";
+
 
 const Table = styled.table`
   width: 100%;
@@ -43,10 +45,18 @@ export const Td = styled.td`
   }
 `;
 
-const Grid = ({ cursos, setCursos, setOnEdit }) => {
+function searchComparison(nome, ref) {
+  return nome.toUpperCase().includes(ref.toUpperCase())
+}
+
+const Grid = ({ cursos, setCursos }) => {
+  const [ref, setRef] = useState("");
+  const navigate = useNavigate();
 
   const handleEdit = (item) => {
-    setOnEdit(item);
+    // navigate passando o item para o criar/editar curso
+    // console.log({item})
+    navigate("/CriarNovoCurso", { state: { edit: item } })
   }
 
   const handleVisibility = async (item) => {
@@ -68,12 +78,17 @@ const Grid = ({ cursos, setCursos, setOnEdit }) => {
         toast.success(data);
       })
       .catch(({ data }) => toast.error(data));
-    
-    setOnEdit(null);
   }
 
 
   return (
+    <>
+    <input 
+          type="text"
+          placeholder="Digite o nome do curso"
+          onChange={ (e) => setRef(e.target.value)}
+          value={ref}
+      />
     <Table>
       <Thead>
         <Tr>
@@ -87,7 +102,7 @@ const Grid = ({ cursos, setCursos, setOnEdit }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {cursos.map((item, i) => (
+        {cursos.filter(curso => searchComparison(curso.nome, ref)).map((item, i) => (
           <Tr key={i}>
             <Td width="15%">{item.imagem}</Td>
             <Td width="20%">{item.nome}</Td>
@@ -106,6 +121,7 @@ const Grid = ({ cursos, setCursos, setOnEdit }) => {
         ))}
       </Tbody>
     </Table>
+    </>
   );
 }
 

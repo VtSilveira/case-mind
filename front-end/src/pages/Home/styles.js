@@ -34,10 +34,10 @@ export const Form = styled.form`
     flex: 1;
     height: 46px;
     margin-bottom: 15px;
-    padding: 10px 20px;
+    padding-left: 3%;
     color: #777;
     font-size: 15px;
-    width: 100%;
+    width: 97%;
     border: 1px solid #ddd;
     &::placeholder {
       color: gray;
@@ -68,5 +68,9 @@ export const Form = styled.form`
   }
   label {
     align-self: start;
+  }
+  .input-label {
+    width: 100%;
+    margin: 0 auto;
   }
 `;

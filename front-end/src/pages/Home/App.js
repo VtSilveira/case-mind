@@ -33,7 +33,6 @@ const Button = styled.button`
 
 function App() {
   const [cursos, setCursos] = useState([]);
-  const [onEdit, setOnEdit] = useState(null);
   const navigate = useNavigate();
 
   const getCursos = async () => {
@@ -61,12 +60,10 @@ function App() {
 
   return (
     <>
-    
       <Container>
         <Title> CURSOS </Title>
-        <Button onClick={() => navigate("/CriarNovoCurso")}>Criar novo curso</Button>
-        {/* <Form onEdit = { onEdit } setOnEdit = { setOnEdit } getcursos = { getCursos } /> */}
-        <Grid cursos = { cursos } setCursos = { setCursos } setOnEdit = { setOnEdit } />
+        <Button onClick={() => navigate("/CriarNovoCurso",)}>Criar novo curso</Button>
+        <Grid cursos={ cursos } setCursos={ setCursos } />
       </Container>
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
       <GlobalStyle />

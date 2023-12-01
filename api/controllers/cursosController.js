@@ -49,13 +49,14 @@ export const addCurso = (req, res) => {
 };
 
 export const updateCurso = (req, res) => {
-  const query = "UPDATE curso SET `nome` = ?, `categoria` = ?, `descricao` = ?, `imagem` = ? WHERE `idcurso` = ?";
+  const query = "UPDATE curso SET `nome` = ?, `categoria` = ?, `descricao` = ?, `imagem` = ?, `professor` = ? WHERE `idcurso` = ?";
 
   const values = [
     req.body.nome,
     req.body.categoria,
     req.body.descricao,
     req.body.imagem,
+    req.body.professor,
   ];
 
   db.query(query, [...values, req.params.id], (err) => {
