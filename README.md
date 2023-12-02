@@ -39,13 +39,13 @@ export const db = mysql.createConnection({
 
 A senha é a definida com o comando SQL.
 
-Para que seja possível acessar os usuários com as senhas encriptadas no banco de dados, crie um arquivo .env (/case-mind/api/.env) e adicione a seguinte variável à ele:
+Crie um arquivo .env (/case-mind/api/.env) e adicione a seguinte variável à ele:
 
 ```.env
 JWT_SECRET = "7c0fbc43736934c61287acc3097ba665e26691218a5eb673990a1403b210e0c0"
 ```
 
-Em situações normais, essa variável não seria compartilhada. Mas, como será necessário acessar as senhas que foram encriptadas usando ela, então é necessário compartilhar.
+Esta variável é responsável por gerar uma signature para os tokens.
 
 Por fim, abra um terminal no repositório e digite os seguintes comandos:
 
