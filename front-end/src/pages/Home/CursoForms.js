@@ -141,7 +141,7 @@ function CursoForms({ onEdit, setOnEdit }) {
           <input
             type="text"
             name="imagem"
-            placeholder="Imagem"
+            placeholder="Insira a URL da imagem"
             onChange={handleInputChange}
             value={state.imagem}
           />
